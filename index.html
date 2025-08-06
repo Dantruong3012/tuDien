@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tu Dien</title>
+  </head>
+  <body>
+    <form action="#" method="get">
+      <fieldset>
+        <legend>Dicttionary</legend>
+        <input type="text" id="inputWord" placeholder="please enter word" />
+        <button onclick="search()">Search</button>
+        <p id="result"></p>
+      </fieldset>
+    </form>
+    <script>
+      var array = ["love", "math", "english", "house", "bowl", "plate"];
+      var arrays = ["Tình yêu", "Toán", "Tiếng anh", "Nhà", "Bát", "Đĩa"];
+      function search() {
+        var inputText = document
+          .getElementById("inputWord")
+          .value.trim()
+          .toLowerCase();
+        inputText = inputText.toLowerCase();
+        var index = array.indexOf(inputText);
+        if (index !== -1) {
+          document.getElementById("result").innerHTML =
+            "Translated: " + arrays[index];
+        } else
+          document.getElementById("result").innerHTML = "Word is not found!";
+      }
+    </script>
+  </body>
+</html>
