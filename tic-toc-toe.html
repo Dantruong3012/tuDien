@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tic tac toe game</title>
+  </head>
+  <body>
+    <h1>Tic tac toe</h1>
+    <div id="dash" style="font-family: monospace; white-space: pre"></div>
+    <br /><br />
+    <button onclick="change()">Change value</button>
+    <script>
+      var array = [
+        ["(.)", "(.)", "(.)", "(.)", "(.)"],
+        ["(.)", "(.)", "(.)", "(.)", "(.)"],
+        ["(.)", "(.)", "(.)", "(.)", "(.)"],
+        ["(.)", "(.)", "(.)", "(.)", "(.)"],
+        ["(.)", "(.)", "(.)", "(.)", "(.)"],
+      ];
+      var currentPlayer = "X";
+      var win = false;
+      function dashDisplay() {
+        var result = "";
+        for (let i = 0; i < array.length; i++) {
+          for (let j = 0; j < array[i].length; j++) {
+            result += array[i][j] + "&nbsp;&nbsp";
+          }
+
+          result += "<br>" + "<br>";
+        }
+        document.getElementById("dash").innerHTML = result;
+      }
+      function change() {
+        var x = Number(prompt("vui long nhap so X"));
+        var y = Number(prompt("vui long nhap so Y"));
+        if (
+          x >= 0 &&
+          x < array.length &&
+          y >= 0 &&
+          y < array[0].length &&
+          array[x][y] === "(.)"
+        ) {
+          array[x][y] = currentPlayer;
+          currentPlayer = currentPlayer === "X" ? "O" : "X";
+        }
+        dashDisplay();
+        if (checkWin(currentPlayer === "X" ? "O" : "X")) {
+          alert(`${currentPlayer === "X" ? "O" : "X"} wins`);
+          return;
+        }
+      }
+
+      function checkWin(Player) {
+        // hang ngang
+        for (let i = 0; i < 5; i++) {
+          for (let j = 0; j <= 2; j++) {
+            if (
+              array[i][j] === Player &&
+              array[i][j + 1] === Player &&
+              array[i][j + 2] === Player
+            ) {
+              return true;
+            }
+          }
+        }
+
+        // hang doc
+        for (let i = 0; i <= 2; i++) {
+          for (let j = 0; j < 5; j++) {
+            if (
+              array[i][j] === Player &&
+              array[i + 1][j] === Player &&
+              array[i + 2][j] === Player
+            ) {
+              return true;
+            }
+          }
+        }
+
+        // cheo chinh xuong phai
+
+        for (let i = 0; i <= 2; i++) {
+          for (let j = 0; j <= 2; j++) {
+            if (
+              array[i][j] === Player &&
+              array[i + 1][j + 1] === Player &&
+              array[i + 2][j + 2] === Player
+            ) {
+              return true;
+            }
+          }
+        }
+
+        // cheo phu xuong trai
+        for (let i = 0; i <= 2; i++) {
+          for (let j = 2; j < 5; j++) {
+            if (
+              array[i][j] === Player &&
+              array[i + 1][j - 1] === Player &&
+              array[i + 2][j - 2] === Player
+            ) {
+              return true;
+            }
+          }
+        }
+      }
+
+      dashDisplay();
+    </script>
+  </body>
+</html>
